@@ -9,8 +9,7 @@ import { ExchangeModule } from './exchange/exchange.module';
 
 @Module({
   imports: [
-    // MongooseModule.forRoot('mongodb://localhost:27017/three-in-one-db'),
-    MongooseModule.forRoot('mongodb+srv://admin:pass@cluster0.bjon7.mongodb.net/securitize?retryWrites=true&w=majority'),
+    MongooseModule.forRoot(process.env.DB_URI),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,

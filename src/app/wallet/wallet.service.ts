@@ -12,7 +12,6 @@ import {
   UpdateWalletInput,
 } from './wallet.inputs';
 
-const API_KEY = 'NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY';
 const API_COOLDOWN = 600;
 
 @Injectable()
@@ -36,7 +35,7 @@ export class WalletService {
 
   async list(filters: ListWalletInput) {
     const wallets: any = await this.walletModel.find({ ...filters }).exec();
-
+    const API_KEY = process.env.ETHERSCAN_API_KEY;
     // GET WALLET INFO - BALANCE & TRANSACTIONS
     const rawData = await Promise.all(wallets.map((w, i) => {  
       return new Promise((res) => {

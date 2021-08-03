@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+    dev:
+        container_name: securitize_api_dev
+        image: securitize-api
+        build:
+            context: .
+            target: development
+            dockerfile: ./Dockerfile
+        command: npm run start:debug
+        ports:
+            - 3000:3000
+            - 9229:9229
+        networks:
+            - securitize-network
+        volumes:
+            - .:/usr/src/app
+            - /usr/src/app/node_modules
+        restart: unless-stopped
+        environment:
+            - DB_URI=mongodb://mongo:27017
+            - PORT=3000
+            - API_KEY=NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY
+    mongo:
+        image: mongo
+        ports:
+            - 27017:27017
+        networks:
+            - securitize-network
+        volumes:
+            - mongodb:/data/securitize
+    prod:
+        container_name: securitize_api_prod
+        image: securitize-api
+        build:
+            context: .
+            target: production
+            dockerfile: ./Dockerfile
+        command: npm run start:prod
+        ports:
+            - 3001:3001
+            - 9230:9230
+        networks:
+            - securitize-network
+        volumes:
+            - .:/usr/src/app
+            - /usr/src/app/node_modules
+        restart: unless-stopped
+        environment:
+            - DB_URI=mongodb+srv://admin:pass@cluster0.bjon7.mongodb.net/securitize?retryWrites=true&w=majority
+            - PORT=3001
+            - API_KEY=NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY
+volumes:
+        mongodb:
+networks:
+    securitize-network:
