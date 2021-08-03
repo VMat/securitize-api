@@ -21,7 +21,7 @@ services:
         environment:
             - DB_URI=mongodb://mongo:27017
             - PORT=3000
-            - API_KEY=NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY
+            - ETHERSCAN_API_KEY=NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY
     mongo:
         image: mongo
         ports:
@@ -50,7 +50,7 @@ services:
         environment:
             - DB_URI=mongodb+srv://admin:pass@cluster0.bjon7.mongodb.net/securitize?retryWrites=true&w=majority
             - PORT=3001
-            - API_KEY=NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY
+            - ETHERSCAN_API_KEY=NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY
 volumes:
         mongodb:
 networks:
